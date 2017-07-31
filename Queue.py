@@ -11,3 +11,25 @@ class Queue:
         return self.items[0]
     def size(self):
         return len(self.items)
+
+
+    def reverse(self):
+        element = None
+        if self.size() == 1:
+            return
+        element = self.deque()
+        self.reverse()
+        self.enque(element)
+
+queue = Queue()
+queue.enque(1)
+queue.enque(2)
+queue.enque(3)
+queue.enque(4)
+queue.enque(5)
+print(queue.items)
+
+queue.reverse()
+print('After Reverse')
+
+print(queue.items)
