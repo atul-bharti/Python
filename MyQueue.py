@@ -1,4 +1,4 @@
-class Queue:
+class MyQueue:
     def __init__(self):
         self.items = []
     def is_empty(self):
@@ -21,7 +21,7 @@ class Queue:
         self.reverse()
         self.enque(element)
 
-queue = Queue()
+queue = MyQueue()
 queue.enque(1)
 queue.enque(2)
 queue.enque(3)
