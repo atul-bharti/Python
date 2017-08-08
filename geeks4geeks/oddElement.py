@@ -1,7 +1,7 @@
 def mysearch(arr):
     a = (len(arr) - 1 )
     mid = a//2
-    if arr[mid] != arr[mid -1 ] and arr[mid] != arr[mid + 1]:
+    if mid%2 == 0:
         return arr[mid]
     if arr[mid] == arr[mid-1]:
         #element is in right side
@@ -15,7 +15,7 @@ def mysearch(arr):
         mysearch(arr[:mid ])
 
     return None
-print(mysearch([1,1,3,5,5]))
+print(mysearch([1,1,5,5]))
 
 
 # A Binary search based function to find
@@ -49,4 +49,4 @@ def search(arr, low, high):
             return search(arr, low, mid - 1)
 
 
-print(search([1,1,5,5,7,9],0,5))
+print(search([1,1,5,5],0,3))
