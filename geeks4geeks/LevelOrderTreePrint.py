@@ -1,9 +1,9 @@
 from ds.MyTree import MyBinaryTree
-from MyQueue import Queue
+from MyQueue import MyQueue
 def printTreeLevel(mytree):
     if mytree == None:
         return
-    queue = Queue()
+    queue = MyQueue()
     queue.enque(mytree)
     while (queue.size() > 0):
         newTree = queue.deque()
@@ -27,24 +27,36 @@ def printTreeLevelRec(queue):
     printTreeLevelRec(queue)
 
 
-def printTreeLevelSpiral(queue,direction):
-    if queue.size() == 0:
+def printTreeLevelSpiral(queue1,queue2,direction):
+    inqueue = MyQueue()
+    outqueue = MyQueue()
+    if queue1.size() == 0:
         return
-    newTree = queue.deque()
+    if queue2.size() == 0:
+        return
+    if queue1.size() == 0:
+        inqueue = queue2
+        outqueue = queue1
+    else:
+        inqueue = queue1
+        outqueue = queue2
+    newTree = inqueue.deque()
 
     print(newTree.get_root_val(), end=' ')
     if(direction):
         if newTree.get_left_child() != None:
-            queue.enque(newTree.get_left_child())
+            outqueue.enque(newTree.get_left_child())
         if newTree.get_right_child() != None:
-            queue.enque(newTree.get_right_child())
+            outqueue.enque(newTree.get_right_child())
+            printTreeLevelSpiral(inqueue, outqueue, direction)
     else:
         if newTree.get_right_child() != None:
-            queue.enque(newTree.get_right_child())
+            outqueue.enque(newTree.get_right_child())
         if newTree.get_left_child() != None:
-            queue.enque(newTree.get_left_child())
+            outqueue.enque(newTree.get_left_child())
+        printTreeLevelSpiral(inqueue, outqueue,direction)
 
-    printTreeLevelSpiral(queue,not direction)
+
 
 
 
@@ -59,6 +71,8 @@ mytree2.get_right_child().insert_left(50)
 mytree2.get_right_child().insert_right(40)
 
 
-testQ = Queue()
+testQ = MyQueue()
+bQueue = MyQueue()
 testQ.enque(mytree2)
-printTreeLevelSpiral(testQ,True)
+printTreeLevelSpiral(testQ,bQueue,True)
+print('Hi')
