@@ -20,7 +20,7 @@ class MyQueue:
         element = self.deque()
         self.reverse()
         self.enque(element)
-
+'''
 queue = MyQueue()
 queue.enque(1)
 queue.enque(2)
@@ -33,3 +33,4 @@ queue.reverse()
 print('After Reverse')
 
 print(queue.items)
+'''
