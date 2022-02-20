@@ -1,0 +1,48 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Feb 19 21:15:36 2022
+
+@author: 1622569
+"""
+import os
+
+import datetime
+
+
+file_location = r"C:\Users\1622569\OneDrive - Standard Chartered Bank\Documents\Personal\Document"
+path = os.walk(file_location)
+file_dict = {}
+duplicate_count = 0
+
+#for dirpath,directories,files in path :
+    #print("Traversing:",dirpath,directories,files)
+for dirpath,directories,files in path :
+    #print ("File Path - ",dirpath)
+    for filename in files:
+        existing_image = file_dict.get(filename)
+        print("Checking:",filename,"Existing File :",existing_image)
+        curr_file = dirpath+"\\"+filename
+        file_size = os.path.getsize(curr_file)
+        file_modified_time_epoch = os.path.getmtime(curr_file)
+        file_creation_time = datetime.datetime.utcfromtimestamp(file_modified_time_epoch).strftime('%Y-%m-%d %H:%M:%S')
+
+        if existing_image is not None:
+            existing_image_time = existing_image[0] 
+            existing_image_size = existing_image[1]
+            print("Comparing file")
+            print (existing_image_time,file_creation_time)
+            print (existing_image_size,existing_image_size)
+            if existing_image_time == file_creation_time and existing_image_size == file_size:
+                    #its a duplicate image
+                duplicate_count+=1
+            
+        else:
+             print("Adding:",filename)
+             image_tuple = (file_creation_time,file_size)
+             file_dict[filename] = image_tuple
+        #print (os.path.getctime(curr_file))
+        #print (file_creation_time_1)
+        #print("\t\t",filename,"File_Size",file_size,file_creation_time,"\n")
+        print("\n")
+    print("\n")
+print("Total DUplicate Files :",duplicate_count)
